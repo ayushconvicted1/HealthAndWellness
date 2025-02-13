@@ -4,18 +4,21 @@
     "slug": "HealthAndWellness",
     "version": "1.0.0",
     "orientation": "portrait",
+    "owner": "ayushconvicted",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ayushconvicted.HealthAndWellness"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.ayushconvicted.HealthAndWellness"
     },
     "web": {
       "bundler": "metro",
@@ -36,6 +39,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "c7bba136-8958-4c73-9377-4f6e1c3d549f"
+      }
     }
   }
 }

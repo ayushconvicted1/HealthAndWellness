@@ -1,74 +1,99 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { Image, StyleSheet, Platform, View, Text, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function HomeScreen() {
+  const [loading, setLoading] = useState(true);
+  const [healthData, setHealthData] = useState({
+    steps: 0,
+    heartRate: 0,
+    sleepHours: 0,
+  });
+
+  useEffect(() => {
+    // Simulate data fetching
+    setTimeout(() => {
+      setHealthData({
+        steps: 8500,
+        heartRate: 72,
+        sleepHours: 7.5,
+      });
+      setLoading(false);
+    }, 1000); // Simulate a 2-second fetch time
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      <Text style={styles.welcomeText}>Welcome, Ayush! 👋</Text>
+      <Text style={styles.subtitle}>Here’s your health summary for today:</Text>
+
+      <View style={styles.card}>
+        <MaterialCommunityIcons name="walk" size={30} color="#4CAF50" />
+        <Text style={styles.metricLabel}>Steps Taken</Text>
+        <Text style={styles.metricValue}>{healthData.steps}</Text>
+      </View>
+
+      <View style={styles.card}>
+        <MaterialCommunityIcons name="heart-pulse" size={30} color="#E53935" />
+        <Text style={styles.metricLabel}>Heart Rate</Text>
+        <Text style={styles.metricValue}>{healthData.heartRate} bpm</Text>
+      </View>
+
+      <View style={styles.card}>
+        <MaterialCommunityIcons name="sleep" size={30} color="#3F51B5" />
+        <Text style={styles.metricLabel}>Sleep Hours</Text>
+        <Text style={styles.metricValue}>{healthData.sleepHours} hrs</Text>
+      </View>
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  container: {
+    flex: 1,
+    backgroundColor: '#F5F5F5',
+    padding: 20,
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: 8,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  welcomeText: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  subtitle: {
+    fontSize: 16,
+    color: '#757575',
+    marginBottom: 20,
+  },
+  card: {
+    width: '90%',
+    backgroundColor: '#FFF',
+    padding: 15,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  metricLabel: {
+    fontSize: 16,
+    color: '#424242',
+    marginTop: 5,
+  },
+  metricValue: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 3,
   },
 });
