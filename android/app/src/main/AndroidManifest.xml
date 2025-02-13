@@ -24,9 +24,12 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="myapp"/>
         <data android:scheme="com.ayushconvicted.HealthAndWellness"/>
         <data android:scheme="exp+healthandwellness"/>
+        <data android:scheme="HealthAndWellness"/>
+        <data android:scheme="com.ayushconvicted.HealthAndWellness"/>
+        <data android:scheme="com.ayushconvicted.healthandwellness"/>
+        <data android:scheme="com.ayushconvicted.healthandwellness"/>
       </intent-filter>
     </activity>
   </application>

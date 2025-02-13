@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "owner": "ayushconvicted",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "com.ayushconvicted.healthandwellness",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -18,7 +18,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ayushconvicted.HealthAndWellness"
+      "package": "com.ayushconvicted.healthandwellness"
     },
     "web": {
       "bundler": "metro",

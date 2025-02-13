@@ -1,4 +1,4 @@
-package com.ayushconvicted.HealthAndWellness
+package com.ayushconvicted.healthandwellness
 
 import android.app.Application
 import android.content.res.Configuration

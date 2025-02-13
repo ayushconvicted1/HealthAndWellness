@@ -1,9 +1,10 @@
-import { View, Text, Image, StyleSheet, Button, ActivityIndicator, Animated } from "react-native";
+import { View, Text, Image, StyleSheet, Button, ActivityIndicator, Animated, ToastAndroid } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as SecureStore from "expo-secure-store";
 import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
+import * as AuthSession from 'expo-auth-session'
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -11,12 +12,16 @@ const Profile = () => {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const fadeAnim = useRef(new Animated.Value(0)).current;
+  const redirectUri = AuthSession.makeRedirectUri();
 
   const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId: "350300823747-m20a647k8i8oc336lmvdv5abpu9ak0pb.apps.googleusercontent.com",
+    webClientId: "350300823747-m20a647k8i8oc336lmvdv5abpu9ak0pb.apps.googleusercontent.com",
     iosClientId: "350300823747-solghvjrhuq1t0u828qjtkgfvb7uo13c.apps.googleusercontent.com",
     androidClientId: "350300823747-d4a7r31u7p1frj9plff0cfi7sqqm1ahl.apps.googleusercontent.com",
-  });
+    redirectUri: redirectUri
+  }, );
+
+
 
   // Restore user session
   useEffect(() => {
@@ -36,12 +41,21 @@ const Profile = () => {
     restoreSession();
   }, []);
 
-  // Handle login response
   useEffect(() => {
-    if (response?.type === "success") {
-      fetchUserInfo(response.authentication?.accessToken);
-    }
+    const handleAuthResponse = async () => {
+      if (response?.type === "success") {
+        const { accessToken } = response.authentication || {};
+        ToastAndroid.show("Login Succeeded!", ToastAndroid.SHORT)
+        if (accessToken) {
+          await SecureStore.setItemAsync("userToken", accessToken);
+          fetchUserInfo(accessToken);
+        }
+      }
+    };
+  
+    handleAuthResponse();
   }, [response]);
+  
 
   const fetchUserInfo = async (token: any) => {
     try {

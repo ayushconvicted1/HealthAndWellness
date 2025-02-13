@@ -27,7 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>myapp</string>
+          <string>com.ayushconvicted.healthandwellness</string>
           <string>com.ayushconvicted.HealthAndWellness</string>
         </array>
       </dict>

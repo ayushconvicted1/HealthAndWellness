@@ -86,13 +86,16 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.ayushconvicted.HealthAndWellness'
+    namespace 'com.ayushconvicted.healthandwellness'
     defaultConfig {
-        applicationId 'com.ayushconvicted.HealthAndWellness'
+        applicationId 'com.ayushconvicted.healthandwellness'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
+        manifestPlaceholders = [
+            'appAuthRedirectScheme': 'com.ayushconvicted.healthandwellness'
+        ]
     }
     signingConfigs {
         debug {

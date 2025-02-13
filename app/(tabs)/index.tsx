@@ -1,6 +1,7 @@
 import { Image, StyleSheet, Platform, View, Text, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useRouter } from "expo-router";
 
 export default function HomeScreen() {
   const [loading, setLoading] = useState(true);
@@ -21,6 +22,9 @@ export default function HomeScreen() {
       setLoading(false);
     }, 1000); // Simulate a 2-second fetch time
   }, []);
+
+  
+  
 
   if (loading) {
     return (

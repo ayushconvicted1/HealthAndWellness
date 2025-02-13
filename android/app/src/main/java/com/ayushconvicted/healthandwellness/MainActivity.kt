@@ -1,4 +1,4 @@
-package com.ayushconvicted.HealthAndWellness
+package com.ayushconvicted.healthandwellness
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build
