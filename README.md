@@ -1,50 +1,110 @@
-# Welcome to your Expo app 👋
+# Health & Wellness App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 📌 Project Description
+This is a **Health & Wellness** mobile application built using **React Native** and **Expo**. It provides users with an overview of their daily health statistics, including activity tracking, nutrition logging, and sleep analysis. The app integrates **Google Authentication** and supports smooth UI transitions for a better user experience.
 
-## Get started
+## 🚀 Setup and Run Instructions
+### **1️⃣ Prerequisites**
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (Latest LTS version recommended)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
+- [Android Studio](https://developer.android.com/studio) (For Android Emulator) or [Xcode](https://developer.apple.com/xcode/) (For iOS Simulator)
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+### **2️⃣ Clone the Repository**
+```sh
+git clone https://github.com/ayushconvicted1/HealthAndWellness.git
+cd health-wellness-app
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### **3️⃣ Install Dependencies**
+```sh
+yarn install   # or npm install
+```
 
-## Learn more
+### **4️⃣ Configure Google Authentication**
+1. Set up a **Google OAuth Consent Screen** and create OAuth Client IDs in **Google Cloud Console**.
+2. Update the `useAuthRequest` config inside `profile.tsx` with your credentials:
+```tsx
+const [request, response, promptAsync] = Google.useAuthRequest({
+  clientId: "YOUR_GOOGLE_CLIENT_ID",
+  iosClientId: "YOUR_IOS_CLIENT_ID",
+  androidClientId: "YOUR_ANDROID_CLIENT_ID",
+});
+```
+3. Ensure the **redirect URI** matches the one registered in Google Cloud:
+```
+https://auth.expo.io/@your-username/your-app-slug
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### **5️⃣ Run the Application**
+#### **For Android & iOS (Using Expo Go)**
+```sh
+expo start
+```
+#### **For Custom Development Clients**
+```sh
+expo run:android   # For Android
+expo run:ios       # For iOS
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+For Google Oauth to work properly, use Custom Development Clients.
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+## 🎯 Features Implemented
+### **🔹 User Authentication**
+✅ Google OAuth Login & Logout
+✅ Secure token storage using `expo-secure-store`
+✅ Smooth UI transitions and visual feedback
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### **🔹 Health Tracking Screens**
+1. **🏠 Home Screen**
+   - Displays user’s daily summary (steps, heart rate, sleep hours)
+2. **🚶 Activity Screen**
+   - Tracks steps, distance traveled, and calories burned
+3. **🥗 Nutrition Screen**
+   - Shows calorie intake, water consumption, and meals logged
+4. **😴 Sleep Screen**
+   - Displays sleep duration, quality, and restfulness score
+
+### **🔹 UI Enhancements**
+✅ **Smooth transitions & loading indicators** when fetching simulated data
+✅ **Minimalist and user-friendly card-based design**
+✅ **MaterialCommunityIcons** for intuitive visuals
+
+---
+
+## 📌 Design Decisions & Assumptions
+1. **Expo for Fast Development:**
+   - Expo simplifies cross-platform compatibility.
+   - Used `expo-auth-session` for authentication.
+   
+2. **Google Authentication Handling:**
+   - Tokens are securely stored with `expo-secure-store`.
+   - The app ensures users remain logged in after restarting.
+   
+3. **Simulated Health Data:**
+   - Used static data for initial development.
+   - Future updates may integrate actual health tracking APIs.
+   
+4. **Consistent UI Across Screens:**
+   - Used `SafeAreaView` for better iOS and Android support.
+   - Standardized card layouts for uniform UX.
+
+---
+
+## 📬 Future Enhancements
+🔹 **Integrate Health APIs** (Google Fit, Apple Health)
+🔹 **Add Dark Mode Support**
+🔹 **Enable User Profile Editing**
+🔹 **Push Notifications for Health Reminders**
+
+---
+
+### **💡 Contributors & Support**
+👤 **Ayush Pandey** - Full-stack Developer
+
+For any issues or feature requests, feel free to open an [issue](https://github.com/ayushconvicted1/HealthAndWellness/issues).
+
+Happy Coding! 🚀
+
