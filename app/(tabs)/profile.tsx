@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, Button, ActivityIndicator, Animated, ToastAndroid } from "react-native";
+import { View, Text, Image, StyleSheet, Button, ActivityIndicator, Animated, ToastAndroid, Platform } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as SecureStore from "expo-secure-store";
@@ -45,7 +45,7 @@ const Profile = () => {
     const handleAuthResponse = async () => {
       if (response?.type === "success") {
         const { accessToken } = response.authentication || {};
-        ToastAndroid.show("Login Succeeded!", ToastAndroid.SHORT)
+        Platform.OS === 'android' && ToastAndroid.show("Login Succeeded!", ToastAndroid.SHORT)
         if (accessToken) {
           await SecureStore.setItemAsync("userToken", accessToken);
           fetchUserInfo(accessToken);
